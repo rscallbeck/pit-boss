@@ -32,7 +32,7 @@ COPY --from=pruner /usr/src/app/out/json/ .
 COPY --from=pruner /usr/src/app/out/package-lock.json ./package-lock.json
 
 # RUN npm ci
-CMD ["npm", "ci"]
+# CMD ["npm", "ci"]
 
 # Now copy the actual isolated source code
 COPY --from=pruner /usr/src/app/out/full/ .
@@ -60,7 +60,8 @@ COPY --from=pruner /usr/src/app/out/full/ .
 # ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_PivOI-BiCaLweKwOEhaqnw_Ko5vh2jO
 
 # Explicitly run the turbo build targeting only the web app
-RUN npx turbo run build --filter=web
+# RUN npx turbo run build --filter=web
+CMD ["npx", "turbo", "run", "build", "--filter=web"]
 
 # ==========================================
 # STAGE 3: Run the Production Server
@@ -74,7 +75,7 @@ ENV NODE_ENV=production
 RUN groupadd -r aegisgroup && useradd -r -g aegisgroup aegisuser
 
 COPY --from=builder --chown=aegisuser:aegisgroup /usr/src/app/apps/web/.next/standalone ./
-COPY --from=builder --chown=aegisuser:aegisgroup /usr/src/app/apps/web/.next/static ./apps/casino-web/.next/static
+COPY --from=builder --chown=aegisuser:aegisgroup /usr/src/app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder --chown=aegisuser:aegisgroup /usr/src/app/apps/web/public ./apps/casino-web/public
 
 USER aegisuser
