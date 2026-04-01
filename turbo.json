@@ -4,6 +4,16 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "passThroughEnv": [
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+        "NEXT_PUBLIC_SERVER_URL",
+        "NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID",
+        "NEXT_PUBLIC_CONTRACT_ADDRESS",
+        "NEXT_PUBLIC_RPC_URL",
+        "NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY",
+        "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"
+      ],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },

@@ -14,7 +14,10 @@
     "@repo/ui": "*",
     "next": "16.2.0",
     "react": "^19.2.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "@pit-boss/shared-config": "1.0.0",
+    "@pit-boss/game-crash": "1.0.0",
+    "@pit-boss/game-mines": "1.0.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.2.0",

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pit-boss
+  namespace: aegis-casino
+  labels:
+    app: pit-boss
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: pit-boss
+  template:
+    metadata:
+      labels:
+        app: pit-boss
+    spec:
+      containers:
+        - name: client
+          image: pit-boss:__VERSION__
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          # Injecting the environment variables Next.js needs at runtime
+          envFrom:
+            - secretRef:
+                name: pit-boss-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pit-boss-svc
+  namespace: aegis-casino
+spec:
+  type: NodePort # This allows you to access it via your web browser!
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30000 # Hardcoding the port so it's always localhost:30000
+      protocol: TCP
+  selector:
+    app: pit-boss

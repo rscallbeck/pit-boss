@@ -1,26 +1,64 @@
 @import "tailwindcss";
-@import "@repo/tailwind-config";
+@import "@rainbow-me/rainbowkit/styles.css";
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+/* Tell Tailwind v4 to scan your monorepo packages for class names! */
+@source "../../../packages/**/*.tsx";
+@source "../../../packages/**/*.ts";
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* -----------------------------------------
+   AEGIS CASINO THEME CONFIGURATION
+----------------------------------------- */
+@theme {
+  /* 1. SEMANTIC COLORS */
+  /* This creates classes like `bg-aegis-dark`, `text-aegis-accent`, `border-aegis-surface` */
+  --color-aegis-dark: var(--color-slate-950);
+  --color-aegis-surface: var(--color-slate-900);
+  --color-aegis-border: var(--color-slate-800);
+  
+  --color-aegis-accent: var(--color-emerald-500);
+  --color-aegis-accent-glow: var(--color-emerald-400);
+
+  /* 2. CUSTOM FONTS (Optional) */
+  /* Example: If you add a Google Font like 'Space Grotesk' for the casino numbers */
+  --font-display: "Space Grotesk", sans-serif;
+
+  /* 3. CUSTOM ANIMATIONS */
+  /* You have 'group-hover:scale-110 transition-transform duration-500' in your code. 
+     You can add infinite floating/pulsing animations for the casino cards here. */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* -----------------------------------------
+   GLOBAL BASE STYLES
+----------------------------------------- */
+@layer base {
+  /* Apply global styles to elements here if you don't want to clutter layout.tsx */
+  body {
+    @apply bg-aegis-dark text-white antialiased selection:bg-aegis-accent selection:text-white;
+  }
+
+  /* Custom scrollbar for the sci-fi casino look */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-aegis-dark;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-aegis-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-aegis-accent;
+  }
 }
