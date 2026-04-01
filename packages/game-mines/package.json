@@ -1,0 +1,29 @@
+{
+  "name": "@aegis/game-mines",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "dependencies": {
+    "next": "^16.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io-client": "^4.7.5",
+    "@tailwindcss/postcss": "^4.2.2",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
+    "phaser": "^3.90.0",
+    "@aegis/shared-config": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^10.1.0",
+    "eslint-config-next": "^0.2.4",
+    "supabase": "^2.81.3",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5",
+    "@tailwindcss/postcss": "^4"
+  }
+}

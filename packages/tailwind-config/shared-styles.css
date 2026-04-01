@@ -1,7 +1,64 @@
 @import "tailwindcss";
+@import "@rainbow-me/rainbowkit/styles.css";
 
+/* Tell Tailwind v4 to scan your monorepo packages for class names! */
+@source "../../../packages/**/*.tsx";
+@source "../../../packages/**/*.ts";
+
+/* -----------------------------------------
+   AEGIS CASINO THEME CONFIGURATION
+----------------------------------------- */
 @theme {
-  --color-blue-1000: #2a8af6;
-  --color-purple-1000: #a853ba;
-  --color-red-1000: #e92a67;
+  /* 1. SEMANTIC COLORS */
+  /* This creates classes like `ui:bg-aegis-dark, `ui:text-aegis-accent`, `ui:border-aegis-surface` */
+  --color-aegis-dark: var(--color-slate-950);
+  --color-aegis-surface: var(--color-slate-900);
+  --color-aegis-border: var(--color-slate-800);
+  
+  --color-aegis-accent: var(--color-emerald-500);
+  --color-aegis-accent-glow: var(--color-emerald-400);
+
+  /* 2. CUSTOM FONTS (Optional) */
+  /* Example: If you add a Google Font like 'Space Grotesk' for the casino numbers */
+  --font-display: "Space Grotesk", sans-serif;
+
+  /* 3. CUSTOM ANIMATIONS */
+  /* You have 'group-hover:scale-110 transition-transform duration-500' in your code. 
+     You can add infinite floating/pulsing animations for the casino cards here. */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+  }
+}
+
+/* -----------------------------------------
+   GLOBAL BASE STYLES
+----------------------------------------- */
+@layer base {
+  /* Apply global styles to elements here if you don't want to clutter layout.tsx */
+  body {
+    @apply ui:bg-aegis-dark ui:text-white ui:antialiased ui:selection:bg-aegis-accent ui:selection:text-white;
+  }
+
+  /* Custom scrollbar for the sci-fi casino look */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply ui:bg-aegis-dark;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply ui:bg-aegis-border ui:rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply ui:bg-aegis-accent;
+  }
 }
